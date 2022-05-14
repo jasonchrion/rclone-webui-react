@@ -20,6 +20,7 @@ import * as RclonePropTypes from "../../../utils/RclonePropTypes";
 import FileUploadBox from "./FileUploadBox";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
+import intl from 'react-intl-universal';
 
 /**
  * New Mount Modal shows a button for opening a modal for new mount and then executes okHandle when positive
@@ -79,10 +80,10 @@ const FileUploadModal = (props) => {
                 setIsUploading(false);
                 setFiles(null);
                 toggle();
-                toast.info("File uploaded successfully");
+                toast.info(intl.get("EXPLORER.UPLOAD_SUCCESS"));
             }, err => {
                 setIsUploading(false);
-                toast.error("File upload failed");
+                toast.error(intl.get("EXPLORER.UPLOAD_FAIL"));
             });
     }
 
@@ -100,11 +101,11 @@ const FileUploadModal = (props) => {
                 <i className="fa fa-lg fa-upload"/>
             </Button>
             <UncontrolledTooltip placement="right" target="UploadButton">
-                Upload file(s)
+                {intl.get("EXPLORER.UPLOAD_FILE")}
             </UncontrolledTooltip>
             <Modal isOpen={modal} toggle={toggle}>
                 <DndProvider backend={HTML5Backend}>
-                    <ModalHeader toggle={toggle}>New Mount</ModalHeader>
+                    <ModalHeader toggle={toggle}>{intl.get("EXPLORER.UPLOAD_FILE")}</ModalHeader>
                     <ModalBody>
                         <Container fluid>
                             <FileUploadBox onDrop={filesDropHandler}>
@@ -112,8 +113,8 @@ const FileUploadModal = (props) => {
                                     <Table>
                                         <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Size</th>
+                                            <th>{intl.get("EXPLORER.NAME")}</th>
+                                            <th>{intl.get("EXPLORER.SIZE")}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -129,8 +130,7 @@ const FileUploadModal = (props) => {
 
                                             <Row>
                                                 <i className="fa fa-lg fa-plus mx-auto mt-5"/>
-                                                <p className="text-center mt-2">Click here or drag and drop files to
-                                                    upload</p>
+                                                <p className="text-center mt-2">{intl.get("EXPLORER.UPLOAD_TIP")}</p>
                                             </Row>
 
                                         </label>
@@ -149,8 +149,8 @@ const FileUploadModal = (props) => {
                     </ModalBody>
                     <ModalFooter>
                         <Button data-test="ok-button" color="primary" onClick={fileUploadHandler}
-                                disabled={isUploadDisabled()}>{isUploading ? "Uploading" : "Upload"}</Button>{' '}
-                        <Button data-test="cancel-button" color="secondary" onClick={toggle}>Cancel</Button>
+                                disabled={isUploadDisabled()}>{isUploading ? intl.get("EXPLORER.UPLOADING") : intl.get("EXPLORER.UPLOAD")}</Button>{' '}
+                        <Button data-test="cancel-button" color="secondary" onClick={toggle}>{intl.get("EXPLORER.CANCEL")}</Button>
                     </ModalFooter>
                 </DndProvider>
 

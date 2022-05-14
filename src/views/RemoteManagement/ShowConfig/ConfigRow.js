@@ -5,7 +5,7 @@ import * as  PropTypes from "prop-types";
 import {toast} from "react-toastify";
 import {withRouter} from "react-router-dom";
 import urls from "../../../utils/API/endpoint";
-
+import intl from 'react-intl-universal';
 
 class ConfigRow extends React.Component {
     constructor(props, context) {
@@ -32,17 +32,17 @@ class ConfigRow extends React.Component {
         let {refreshHandle} = this.props;
 
         // Delete http request
-        if (window.confirm(`Are you sure you wish to delete ${name}? You cannot restore it once it is deleted.`)) {
+        if (window.confirm(intl.get("CONFIGS.DELETE_CONFIRM", {name: name}))) {
 
             axiosInstance.post(urls.deleteConfig, {name: name}).then(
                 (res) => {
                     // console.log(res);
                     // Refresh the parent component
                     refreshHandle();
-                    toast.info('Config deleted');
+                    toast.info(intl.get("CONFIGS.CONFIG_DELETED"));
                 }, (err) => {
                     // console.log(`Error occurred: ${err}`);
-                    toast.error('Error deleting config')
+                    toast.error(intl.get("CONFIGS.CONFIG_DELETED_ERROR"))
                 }
             )
         }
@@ -59,8 +59,8 @@ class ConfigRow extends React.Component {
                 <td>{type}</td>
                 <td>
 
-                    <Button className={"bg-info mr-2"} onClick={this.onUpdateClicked}>Update</Button>
-                    <Button className={"bg-danger"} onClick={this.onDeleteClicked}>Delete</Button>
+                    <Button className={"bg-info mr-2"} onClick={this.onUpdateClicked}>{intl.get("CONFIGS.UPDATE")}</Button>
+                    <Button className={"bg-danger"} onClick={this.onDeleteClicked}>{intl.get("CONFIGS.DELETE")}</Button>
                 </td>
             </tr>
         );

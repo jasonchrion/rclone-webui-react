@@ -1,3 +1,9 @@
+import intl from 'react-intl-universal';
+
+export function getMessage(key) {
+    return intl.get(key);
+}
+
 /**
  * Returns whether the passed in object (obj) is empty or it contains some entries.
  * @param obj {$ObjMap} An object to check if it is empty: it can be an array or a map.

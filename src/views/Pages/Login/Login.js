@@ -20,7 +20,7 @@ import axiosInstance from "../../../utils/API/API";
 import urls from "../../../utils/API/endpoint";
 import logo from '../../../assets/img/brand/logo_symbol.png';
 import {LOGIN_TOKEN} from "../../../utils/Constants";
-
+import intl from 'react-intl-universal';
 
 function removeParam(parameter) {
     let url = document.location.href;
@@ -104,7 +104,7 @@ class Login extends Component {
 			}, (error) => {
 				console.log(error);
 				this.setState({
-					error: "Error connecting. Please check username password and verify if rclone is working at the specified IP."
+					error: intl.get("LOGIN.ERROR")
 				})
 			})
 
@@ -179,8 +179,8 @@ class Login extends Component {
                                 <Card className="p-4">
                                     <CardBody>
 										<Form onSubmit={this.onSubmit}>
-											<h1>Login</h1>
-											<p className="text-muted">Sign In to your account</p>
+											<h1>{intl.get("LOGIN.LOGIN")}</h1>
+											<p className="text-muted">{intl.get("LOGIN.SIGNIN")}</p>
 											{error && <UncontrolledAlert color="danger" children={error}/>}
 											<InputGroup className="mb-3">
 												<InputGroupAddon addonType="prepend">
@@ -217,7 +217,7 @@ class Login extends Component {
                                             <Row>
                                                 <Col xs="6">
                                                     <Button color="primary" className="px-4" type="submit"
-                                                            data-testid="LoginForm-BtnLogin">Login</Button>
+                                                            data-testid="LoginForm-BtnLogin">{intl.get("LOGIN.LOGIN")}</Button>
                                                 </Col>
                                             </Row>
                                         </Form>

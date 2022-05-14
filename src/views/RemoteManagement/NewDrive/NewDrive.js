@@ -19,6 +19,7 @@ import {connect} from "react-redux";
 import {NEW_DRIVE_CONFIG_REFRESH_TIMEOUT} from "../../../utils/Constants";
 import ErrorBoundary from "../../../ErrorHandling/ErrorBoundary";
 import urls from "../../../utils/API/endpoint";
+import intl from 'react-intl-universal';
 
 /**
  * Returns a component with set of input, error for the drivePrefix.
@@ -153,8 +154,8 @@ function CustomInput({key, id, label, changeHandler, type, value, name, placehol
             <Col sm={7}>
                 <Input type={type} value={value} name={name} placeholder={placeholder}
                        id={id} onChange={changeHandler} valid={isValid} invalid={!isValid} required/>
-                <FormFeedback valid>Sweet! that name is available</FormFeedback>
-                <FormFeedback>Sad! That name is already assigned or empty</FormFeedback>
+                <FormFeedback valid>{intl.get("DRIVER.NAME_AVAILABLE")}</FormFeedback>
+                <FormFeedback>{intl.get("DRIVER.NAME_ASSIGNED_EMPTY")}</FormFeedback>
             </Col>
         </FormGroup>);
 }
@@ -628,9 +629,9 @@ class NewDrive extends React.Component {
     StepShowCase = ({currentStepNumber}) => {
         const buttonActiveClassName = "step-active";
         const stepTitles = [
-            "Set up Remote Config",
-            "Set up Drive",
-            "Advanced Config"
+            intl.get("DRIVER.SETUP_REMOTE"),
+            intl.get("DRIVER.SETUP_DRIVER"),
+            intl.get("DRIVER.ADVANCED_CONFIG")
         ];
 
         return (
@@ -690,20 +691,19 @@ class NewDrive extends React.Component {
         return (
             <div data-test="newDriveComponent">
                 <ErrorBoundary>
-                    <p>This 3 step process will guide you through creating a new config. For auto config, leave the
-                        parameters as it is.</p>
+                    <p>{intl.get("DRIVER.GUIDE")}</p>
                     <this.StepShowCase currentStepNumber={currentStepNumber}/>
                     <Collapse isOpen={currentStepNumber === 1}>
                         <Card>
 
                             <CardBody>
-                                <CustomInput label="Name of this drive (For your reference)"
+                                <CustomInput label={intl.get("DRIVER.DRIVER_NAME")}
                                              changeHandler={this.changeName} value={driveName}
-                                             placeholder={"Enter a name"} name="name" id="driveName"
+                                             placeholder={intl.get("DRIVER.ENTER_NAME")} name="name" id="driveName"
                                              isValid={driveNameIsValid}/>
 
                                 <FormGroup row>
-                                    <Label for="driveType" sm={5}>Select</Label>
+                                    <Label for="driveType" sm={5}>{intl.get("DRIVER.SELECT_DRIVER")}</Label>
                                     <Col sm={7}>
                                         <ProviderAutoSuggest suggestions={providers} value={drivePrefix}
                                                              onChange={this.changeDriveType}/>
@@ -711,14 +711,14 @@ class NewDrive extends React.Component {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col sm={3}>
-                                        <Label for="inputDriveName">Docs are available at </Label>{' '}
+                                        <Label for="inputDriveName">{intl.get("DRIVER.DOCS")}</Label>{' '}
                                         <a href="https://rclone.org/commands/rclone_config/">Rclone Config</a>
                                     </Col>
                                 </FormGroup>
                                 <div className="clearfix">
                                     <div className="float-right">
 
-                                        <Button className="ml-3 btn-blue" onClick={this.gotoNextStep}>Next</Button>
+                                        <Button className="ml-3 btn-blue" onClick={this.gotoNextStep}>{intl.get("DRIVER.NEXT")}</Button>
 
                                     </div>
                                 </div>
@@ -740,11 +740,10 @@ class NewDrive extends React.Component {
                                 <div className="clearfix">
                                     <div className="float-right">
                                         <Input type="checkbox" value={advancedOptions}
-                                               onChange={this.editAdvancedOptions}/><span className="mr-3">Edit Advanced Options</span>
-                                        <Button className="btn-no-background" onClick={this.gotoPrevStep}>Go
-                                            back</Button>
+                                               onChange={this.editAdvancedOptions}/><span className="mr-3">{intl.get("DRIVER.ADVANCED_OPTIONS")}</span>
+                                        <Button className="btn-no-background" onClick={this.gotoPrevStep}>{intl.get("DRIVER.GO_BACK")}</Button>
 
-                                        <Button className="ml-3 btn-blue" onClick={this.gotoNextStep}>Next</Button>
+                                        <Button className="ml-3 btn-blue" onClick={this.gotoNextStep}>{intl.get("DRIVER.NEXT")}</Button>
 
                                     </div>
                                 </div>
@@ -774,11 +773,10 @@ class NewDrive extends React.Component {
                                 <div className="clearfix">
                                     <div className="float-right">
                                         <Input type="checkbox" value={advancedOptions}
-                                               onChange={this.editAdvancedOptions}/><span className="mr-3">Edit Advanced Options</span>
-                                        <Button className="btn-no-background" onClick={this.gotoPrevStep}>Go
-                                            back</Button>
+                                               onChange={this.editAdvancedOptions}/><span className="mr-3">{intl.get("DRIVER.ADVANCED_OPTIONS")}</span>
+                                        <Button className="btn-no-background" onClick={this.gotoPrevStep}>{intl.get("DRIVER.GO_BACK")}</Button>
 
-                                        <Button className="ml-3 btn-blue" onClick={this.gotoNextStep}>Next</Button>
+                                        <Button className="ml-3 btn-blue" onClick={this.gotoNextStep}>{intl.get("DRIVER.NEXT")}</Button>
                                     </div>
                                 </div>
                             </CardBody>

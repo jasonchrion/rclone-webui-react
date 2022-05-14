@@ -14,6 +14,7 @@ import TabbedPanes from "./TabbedPanes";
 
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from 'react-dnd-html5-backend';
+import intl from 'react-intl-universal';
 
 class RemoteExplorerLayout extends React.Component {
 
@@ -63,24 +64,24 @@ class RemoteExplorerLayout extends React.Component {
                             
 
                         <span className="text-choose-layout">
-                            Choose Layout: {"  "}
+                            {intl.get("EXPLORER.CHOOSE_LAYOUT")}: {"  "}
                         </span>
 
 							<Button color={"primary"} className={"ml-2 layout-change-button"}
 									onClick={() => this.changeLayout(1, "horizontal")}>
-								<img style={{height: 24}} src={singlePaneImg} alt="Single Vertical Pane"/>
+								<img style={{height: 24}} src={singlePaneImg} alt={intl.get("EXPLORER.SINGLE_PANE")}/>
 							</Button>
 							<Button color={"primary"} className={"ml-2 layout-change-button"}
 									onClick={() => this.changeLayout(2, "horizontal")}>
-								<img style={{height: 24}} src={doublePaneImg} alt="Double Vertical Pane"/>
+								<img style={{height: 24}} src={doublePaneImg} alt={intl.get("EXPLORER.DOUBLE_PANE")}/>
 							</Button>
 							<Button color={"primary"} className={"ml-2 layout-change-button"}
 									onClick={() => this.changeLayout(3, "horizontal")}>
-								<img style={{height: 24}} src={triplePaneImg} alt="Triple Vertical Pane"/>
+								<img style={{height: 24}} src={triplePaneImg} alt={intl.get("EXPLORER.TRIPLE_PANE")}/>
 							</Button>
 
 							<Button color={"success"} className={"ml-2"}
-									onClick={this.toggleDistractionFreeMode}><i className="fa fa-arrows"/> Full Screen
+									onClick={this.toggleDistractionFreeMode}><i className="fa fa-arrows"/> {intl.get("EXPLORER.FULL_SCREEN")}
 							</Button>
 							{/*<Button onClick={this.changeLayout(4,"grid")}>4 - grid</Button>*/}
 

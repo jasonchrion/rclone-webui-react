@@ -4,6 +4,7 @@ import {Button, Col, Row, Table} from "reactstrap";
 import * as PropTypes from "prop-types";
 import {addMount, getMountList, unmount, unmountAll} from "../../actions/mountActions";
 import NewMountModal from "./NewMountModal";
+import intl from 'react-intl-universal';
 
 /**
  * MountDashboard is the main page for mounting and unmounting drives.
@@ -45,19 +46,18 @@ class MountDashboard extends React.Component {
 			<div data-test="mountDashboardComponent">
 				<Row>
 					<Col lg={12} className="mb-4 d-flex justify-content-between">
-						<NewMountModal buttonLabel="Create new mount" okHandle={this.handleCreateNewMount}/>
-						<Button className={"float-right"} color="danger" onClick={this.handleUnmountAll}>Unmount
-							all</Button>
+						<NewMountModal buttonLabel={intl.get("MOUNT.CREATE_NEW_MOUNT")} okHandle={this.handleCreateNewMount}/>
+						<Button className={"float-right"} color="danger" onClick={this.handleUnmountAll}>{intl.get("MOUNT.UNMOUNT_ALL")}</Button>
 					</Col>
 				</Row>
 				<Table responsive className="table-striped">
 					<thead>
 					<tr>
-						<th>No.</th>
-						<th>Mount Point</th>
-						<th>Mounted since</th>
-						<th>Fs</th>
-						<th>Actions</th>
+						<th>{intl.get("MOUNT.NUM")}</th>
+						<th>{intl.get("MOUNT.MOUNT_POINT")}</th>
+						<th>{intl.get("MOUNT.MOUNTED_SINCE")}</th>
+						<th>{intl.get("MOUNT.FS")}</th>
+						<th>{intl.get("MOUNT.ACTIONS")}</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -68,7 +68,7 @@ class MountDashboard extends React.Component {
 									<td>{item.MountPoint}</td>
 									<td>{new Date(item.MountedOn).toLocaleTimeString()}</td>
 									<td>{item.Fs}</td>
-									<td><Button color="danger" onClick={() => this.handleRemoveMount(item)}>Unmount</Button>
+									<td><Button color="danger" onClick={() => this.handleRemoveMount(item)}>{intl.get("MOUNT.UNMOUNT")}</Button>
 									</td>
 								</tr>);
 							}

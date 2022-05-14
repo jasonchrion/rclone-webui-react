@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import {changeRemoteName} from "../../../actions/explorerStateActions";
 import {Button, Col, Form} from "reactstrap";
 import {PROP_CURRENT_PATH} from "../../../utils/RclonePropTypes";
+import intl from 'react-intl-universal';
 
 class RemotesList extends React.Component {
 
@@ -15,7 +16,7 @@ class RemotesList extends React.Component {
             isEmpty: false,
             remoteName: props.remoteName,
             openEnabled: false,
-            openButtonText: "Open"
+            openButtonText: intl.get("EXPLORER.OPEN")
         };
     }
 
@@ -28,12 +29,12 @@ class RemotesList extends React.Component {
         if (newValue.indexOf('/') === 0) {
             this.setState({
                 remoteName: newValue,
-                openButtonText: "Open local path",
+                openButtonText:intl.get("EXPLORER.OPEN_LOCAL_PATH")
             });
         } else {
             this.setState({
                 remoteName: newValue,
-                openButtonText: "Open"
+                openButtonText: intl.get("EXPLORER.OPEN")
             });
         }
     };

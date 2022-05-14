@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Nav, NavItem, NavLink} from "reactstrap";
 import {connect} from "react-redux";
 import {addRemoteContainer, changeActiveRemoteContainer, removeRemoteContainer} from "../../../actions/explorerActions";
+import intl from 'react-intl-universal';
 
 function TabsLayout(props) {
     const {addRemoteContainer, removeRemoteContainer, changeActiveRemoteContainer, activeRemoteContainerID} = props;
@@ -18,7 +19,7 @@ function TabsLayout(props) {
                             <NavLink className={"float-center"} onClick={() => changeActiveRemoteContainer(ID, paneID)}>
                                 <i className="fa fa-folder-o pr-1"/>
                                 <span className="overflow-hidden">
-									{currentPaths[ID] && currentPaths[ID].remoteName !== "" ? currentPaths[ID].remoteName : "Open New"}
+									{currentPaths[ID] && currentPaths[ID].remoteName !== "" ? currentPaths[ID].remoteName : intl.get("EXPLORER.OPEN_NEW")}
 								</span>
                                 <Button className="btn-no-background btn btn-secondary p-0 pl-1 pr-2 ml-2"
                                         onClick={(e) => {

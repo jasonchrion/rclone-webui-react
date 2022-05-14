@@ -16,6 +16,7 @@ import RemotesList from "../Explorer/RemotesList";
 import * as PropTypes from "prop-types"
 import {mountOptions, vfsOptions} from "../../utils/MountOptions";
 import {isEmpty, validateDuration, validateInt, validateSizeSuffix} from "../../utils/Tools";
+import intl from 'react-intl-universal';
 
 const OptionFormInput = ({attr, changeHandler, currentValues, isValidMap, errorsMap}) => {
     const labelValue = `${attr.Name}`;
@@ -208,10 +209,10 @@ const NewMountModal = (props) => {
         <div data-test="newMountModalComponent">
             <Button color="primary" onClick={toggle}>{buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
-                <ModalHeader toggle={toggle}>New Mount</ModalHeader>
+                <ModalHeader toggle={toggle}>{intl.get("MOUNT.NEW_MOUNT")}</ModalHeader>
                 <ModalBody>
                     <FormGroup row>
-                        <Label for={"mountFs"} sm={5}>Fs</Label>
+                        <Label for={"mountFs"} sm={5}>{intl.get("MOUNT.FS")}</Label>
                         <Col sm={7}>
                             <RemotesList
                                 remoteName={mountFs}
@@ -221,7 +222,7 @@ const NewMountModal = (props) => {
                         </Col>
                     </FormGroup>
                     {mountFs && <FormGroup row>
-                        <Label for={"mountPoint"} sm={5}>Mount Point</Label>
+                        <Label for={"mountPoint"} sm={5}>{intl.get("MOUNT.MOUNT_POINT")}</Label>
                         <Col sm={7}>
                             <Input type={"text"} value={mountPoint}
                                    name={"mountPoint"}
@@ -235,7 +236,7 @@ const NewMountModal = (props) => {
 
                     <Row>
                         <Col lg={6}>
-                            <p>Mount Options</p>
+                            <p>{intl.get("MOUNT.MOUNT_OPTIONS")}</p>
                             <MountOptions
                                 isValidMap={isValid}
                                 errorsMap={formErrors}
@@ -247,7 +248,7 @@ const NewMountModal = (props) => {
                         </Col>
 
                         <Col lg={6}>
-                            <p>VFS Options</p>
+                            <p>{intl.get("MOUNT.VFS_OPTIONS")}</p>
                             <MountOptions
                                 isValidMap={isValid}
                                 errorsMap={formErrors}
@@ -262,8 +263,8 @@ const NewMountModal = (props) => {
                 </ModalBody>
                 <ModalFooter>
                     <Button data-test="ok-button" color="primary" onClick={handleCreateMount}
-                            disabled={isCreateDisabled()}>Create</Button>{' '}
-                    <Button data-test="cancel-button" color="secondary" onClick={toggle}>Cancel</Button>
+                            disabled={isCreateDisabled()}>{intl.get("MOUNT.CREATE")}</Button>{' '}
+                    <Button data-test="cancel-button" color="secondary" onClick={toggle}>{intl.get("MOUNT.CANCEL")}</Button>
                 </ModalFooter>
             </Modal>
         </div>

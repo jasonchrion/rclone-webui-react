@@ -25,6 +25,7 @@ import ErrorBoundary from "../../../ErrorHandling/ErrorBoundary";
 import {createNewPublicLink, deleteFile, purgeDir} from "rclone-api";
 import {createSelector} from "reselect";
 import DropOverlay from "../../Base/DropOverlay/DropOverlay";
+import intl from 'react-intl-universal';
 
 /*
 * Start code for react DND
@@ -380,32 +381,32 @@ class FilesView extends React.PureComponent {
                                 <thead>
                                 <tr>
                                     <th className="pointer-cursor"
-                                        onClick={() => this.applySortFilter("name")}>Name {sortFilter === "name" &&
+                                        onClick={() => this.applySortFilter("name")}>{intl.get("EXPLORER.NAME")} {sortFilter === "name" &&
                                     <i className={filterIconClass}/>}</th>
                                     <th className="pointer-cursor"
-                                        onClick={() => this.applySortFilter("size")}>Size {sortFilter === "size" &&
+                                        onClick={() => this.applySortFilter("size")}>{intl.get("EXPLORER.SIZE")} {sortFilter === "size" &&
                                     <i className={filterIconClass}/>}</th>
                                     <th className="d-none d-md-table-cell pointer-cursor"
-                                        onClick={() => this.applySortFilter("modified")}>Modified {sortFilter === "modified" &&
+                                        onClick={() => this.applySortFilter("modified")}>{intl.get("EXPLORER.MODIFIED")} {sortFilter === "modified" &&
                                     <i className={filterIconClass}/>}</th>
-                                    <th>Actions</th>
+                                    <th>{intl.get("EXPLORER.ACTIONS")}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {files.length > 0 ? (
                                         <React.Fragment>
                                             <tr>
-                                                <th colSpan={4}>Directories</th>
+                                                <th colSpan={4}>{intl.get("EXPLORER.DIRECTORIES")}</th>
                                             </tr>
                                             {dirComponentMap}
                                             <tr>
-                                                <th colSpan={4}>Files</th>
+                                                <th colSpan={4}>{intl.get("EXPLORER.FILES")}</th>
                                             </tr>
                                             {fileComponentMap}
                                         </React.Fragment>
                                     ) :
                                     <tr>
-                                        <th colSpan={4}>Files</th>
+                                        <th colSpan={4}>{intl.get("EXPLORER.FILES")}</th>
                                     </tr>
                                 }
                                 </tbody>

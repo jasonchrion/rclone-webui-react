@@ -1,6 +1,7 @@
 import Autosuggest from 'react-autosuggest';
 import React from "react";
 import PropTypes from "prop-types";
+import intl from 'react-intl-universal';
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (config, value) => {
@@ -65,7 +66,7 @@ class RemoteListAutoSuggest extends React.Component {
 
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
-            placeholder: 'Type the name of remote you want to open',
+            placeholder: intl.get("EXPLORER.OPEN_NEW_PLACEHOLDER"),
             value: value,
             onChange: onChange
         };

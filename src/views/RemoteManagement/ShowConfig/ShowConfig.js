@@ -4,7 +4,7 @@ import ConfigRow from "./ConfigRow";
 import {connect} from "react-redux";
 import {getConfigDump} from "../../../actions/configActions";
 import * as PropTypes from "prop-types";
-
+import intl from 'react-intl-universal';
 
 function RemoteRows({remotes, refreshHandle}) {
 
@@ -35,7 +35,7 @@ class ShowConfig extends React.PureComponent {
                     <Col lg={8} className={"mb-4"}>
                         <Button color={"primary"} className={"float-left"}
                                 onClick={() => this.props.history.push("/newdrive")}>
-                            Create a New Config
+                            {intl.get("CONFIGS.CREATE_CONFIG")}
                         </Button>
                     </Col>
                     <Col lg={4}>
@@ -46,10 +46,10 @@ class ShowConfig extends React.PureComponent {
                 <Table responsive className="table-striped">
                     <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Actions</th>
+                        <th>{intl.get("CONFIGS.NUM")}</th>
+                        <th>{intl.get("CONFIGS.NAME")}</th>
+                        <th>{intl.get("CONFIGS.TYPE")}</th>
+                        <th>{intl.get("CONFIGS.ACTIONS")}</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -1,5 +1,6 @@
 import {CREATE_MOUNT, GET_MOUNT_LIST, REMOVE_MOUNT, REQUEST_ERROR, REQUEST_SUCCESS} from "../actions/types";
 import {toast} from "react-toastify";
+import intl from 'react-intl-universal';
 
 const initialState = {
 	currentMounts: [],
@@ -10,9 +11,9 @@ export default function (state = initialState, action) {
 	switch (action.type) {
 		case CREATE_MOUNT:
 			if (action.status === REQUEST_SUCCESS) {
-				toast.info('Mount Success');
+				toast.info(intl.get("MOUNT.MOUNT_SUCCESS"));
 			} else if (action.status === REQUEST_ERROR) {
-				toast.error('Error creating mount ' + action.payload);
+				toast.error(intl.get("MOUNT.MOUNT_ERROR", {error: action.payload}));
 			}
 			break;
 		case GET_MOUNT_LIST:
@@ -31,9 +32,9 @@ export default function (state = initialState, action) {
 			break;
 		case REMOVE_MOUNT:
 			if (action.status === REQUEST_SUCCESS) {
-				toast.info('Unmount success');
+				toast.info(intl.get("MOUNT.UNMOUNT_SUCCESS"));
 			} else if (action.status === REQUEST_ERROR) {
-				toast.error("Couldn't remove mount");
+				toast.error(intl.get("MOUNT.UNMOUNT_ERROR"));
 			}
 			break;
 		default:

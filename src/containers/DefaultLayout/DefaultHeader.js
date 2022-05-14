@@ -7,6 +7,7 @@ import {AppNavbarBrand, AppSidebarToggler} from '@coreui/react';
 import logo from '../../assets/img/brand/logo.png'
 import favicon from '../../assets/img/brand/favicon.png'
 import BackendStatusCard from "../../views/Base/BackendStatusCard/BackendStatusCard";
+import intl from 'react-intl-universal';
 
 const propTypes = {
     children: PropTypes.node,
@@ -31,7 +32,7 @@ class DefaultHeader extends Component {
 
                 <Nav className="d-md-down-none" navbar>
                     <NavItem className="px-3">
-                        <NavLink to="/dashboard" className="nav-link">Dashboard</NavLink>
+                        <NavLink to="/dashboard" className="nav-link">{intl.get("NAV.DASHBOARD")}</NavLink>
                     </NavItem>
 
                 </Nav>

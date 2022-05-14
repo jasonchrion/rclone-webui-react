@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {getBandwidth, setBandwidth} from "../../../actions/statusActions";
 import * as PropTypes from "prop-types";
 import {PROP_BANDWIDTH} from "../../../utils/RclonePropTypes";
-
+import intl from 'react-intl-universal';
 
 class BandwidthStatusCard extends React.Component {
 
@@ -99,27 +99,27 @@ class BandwidthStatusCard extends React.Component {
         return ( 
         <Card>
             <CardHeader>
-                Bandwidth <button className="btn btn-white float-right" onClick={this.toggleShowChangeBandwidth}>Modify</button>
+                {intl.get("DASHBOARD.BANDWIDTH")} <button className="btn btn-white float-right" onClick={this.toggleShowChangeBandwidth}>{intl.get("DASHBOARD.MODIFY")}</button>
             </CardHeader>
             <CardBody>
                 <p>
-                    <span className="card-subtitle">Current Max speed: {"  "}</span> 
-                    <span className="card-text">{(bandwidth.rate !== "off") ? bandwidth.rate : "Unlimited"}</span>
+                    <span className="card-subtitle">{intl.get("DASHBOARD.MAX_SPEED")}: {"  "}</span>
+                    <span className="card-text">{(bandwidth.rate !== "off") ? bandwidth.rate : intl.get("DASHBOARD.UNLIMITED")}</span>
                 </p>
                 <Form onSubmit={this.setBandwidth} className={showChangeBandwidth ? "" : "d-none"}>
                     <FormGroup row>
-                        <Label for="bandwidthValue" sm={5}>Enter new max speed (upload:download)</Label>
+                        <Label for="bandwidthValue" sm={5}>{intl.get("DASHBOARD.ENTER_SPEED")}</Label>
                         <Col sm={7}>
                             <Input type="text" value={bandwidthText}
                                     valid={!hasError} invalid={hasError}
                                     id="bandwidthValue" onChange={this.changeBandwidthInput}>
                             </Input>
-                            <FormFeedback valid>Keep empty to reset.</FormFeedback>
-                            <FormFeedback>The bandwidth should be of the form 1M|2M|1G|1K|1.1K etc. Can also be specified as (upload:download)</FormFeedback>
+                            <FormFeedback valid>{intl.get("DASHBOARD.EMPTY_TO_RESET")}</FormFeedback>
+                            <FormFeedback>{intl.get("DASHBOARD.BANDWIDTH_FORMAT")}</FormFeedback>
 
                         </Col>
                     </FormGroup>
-                    <Button className="float-right" color="success" type="submit">Set</Button>
+                    <Button className="float-right" color="success" type="submit">{intl.get("DASHBOARD.SET")}</Button>
 
                 </Form>
                 

@@ -40,6 +40,7 @@ import newFolderImg from '../../../assets/img/new-folder.png';
 import {cleanTrashForRemote} from "rclone-api";
 import {createSelector} from "reselect";
 import FileUploadModal from "./FileUploadModal"; // with import
+import intl from 'react-intl-universal';
 
 function getUrl(currentPath) {
 	const {remoteName, remotePath} = currentPath;
@@ -216,7 +217,7 @@ class FileOperations extends React.Component {
 							onClick={() => getFilesForContainerID(containerID)}><i
 						className={"fa fa-lg fa-repeat"}/></Button>
 					<UncontrolledTooltip placement="right" target="RefreshButton">
-						Refresh Files
+						{intl.get("EXPLORER.REFRESH_FILES")}
 					</UncontrolledTooltip>
 				</div>
 				<div className="flex-grow-1 pl-1 pr-1 pr-lg-3 pl-lg-3">
@@ -234,7 +235,7 @@ class FileOperations extends React.Component {
 							onClick={this.openNewFolderModal}><img src={newFolderImg} alt="New Folder"
 																   className="fa fa-lg"/> </Button>
 					<UncontrolledTooltip placement="bottom" target="CreateFolderButton">
-						Create a new Folder
+						{intl.get("EXPLORER.CREATE_NEW_FOLDER")}
 					</UncontrolledTooltip>
 
 					<ButtonDropdown isOpen={dropdownOpen} toggle={this.toggleDropDown} direction={'down'}
@@ -259,7 +260,7 @@ class FileOperations extends React.Component {
 						<i className={"fa fa-lg " + (gridMode === "card" ? "fa-list" : "fa-th-large")}/>
 					</Button>
 					<UncontrolledTooltip placement="right" target="ListViewButton">
-						{(gridMode === "card" ? "List View" : "Card View")}
+						{(gridMode === "card" ? intl.get("EXPLORER.LIST_VIEW") : intl.get("EXPLORER.CARD_VIEW"))}
 					</UncontrolledTooltip>
 
 					<Button className="btn-explorer-action" id="InfoButton"
@@ -267,7 +268,7 @@ class FileOperations extends React.Component {
 						<i className="fa fa-lg fa-info"/>
 					</Button>
 					<UncontrolledTooltip placement="right" target="InfoButton">
-						Show Remote Info
+						{intl.get("EXPLORER.REMOTE_INFO")}
 					</UncontrolledTooltip>
 					<FileUploadModal currentPath={currentPath} buttonLabel={"Upload"}
 									 buttonClass={"btn-explorer-action"}/>
@@ -290,21 +291,21 @@ class FileOperations extends React.Component {
 
 					<Modal isOpen={isAboutModalOpen} toggle={this.toggleAboutModal}>
 						<ModalHeader>
-							Status for {remoteName}
+							{intl.get("EXPLORER.REMOTE_STATUS", {remoteName: remoteName})}
 						</ModalHeader>
 						<ModalBody>
 							<Row>
 								<Col sm={12}>
 									<div className="chart-wrapper">
-										<p>Space Usage (in GB)</p>
+										<p>{intl.get("EXPLORER.SPACE_USAGE")}</p>
 										{doughnutData && !isEmpty(doughnutData) ? <Doughnut data={doughnutData}/> :
-											<React.Fragment><Spinner color="primary"/>Loading</React.Fragment>}
+											<React.Fragment><Spinner color="primary"/>{intl.get("EXPLORER.LOADING")}</React.Fragment>}
 									</div>
 								</Col>
 							</Row>
 							<Row>
 								<Col sm={12}>
-									<Button color="danger" onClick={this.handleCleanTrash}>Clean Trash <i
+									<Button color="danger" onClick={this.handleCleanTrash}>{intl.get("EXPLORER.CLEAN_TRASH")} <i
 										className="fa fa-lg fa-trash"/></Button>
 								</Col>
 							</Row>

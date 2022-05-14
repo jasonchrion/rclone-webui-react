@@ -8,6 +8,7 @@ import {CustomTooltips} from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 import axiosInstance from "../../../utils/API/API";
 import urls from "../../../utils/API/endpoint";
 import {toast} from "react-toastify";
+import intl from 'react-intl-universal';
 
 const options = {
     tooltips: {
@@ -33,15 +34,15 @@ function JobCard({job}) {
     if (name && !isNaN(speed)) {
 
         return (<Card>
-            <CardHeader>Running Jobs</CardHeader>
+            <CardHeader>{intl.get("DASHBOARD.RUNNING_JOBS")}</CardHeader>
             <CardBody>
                 <p>{name}</p> {/*Name of the file*/}
                 <Progress value={percentage} className={"mb-2"}>{percentage} %</Progress> {/*percentage*/}
-                <p><strong>Speed: </strong>{formatBytes(speed)}PS</p> {/*speed*/}
-                <p><strong>Average Speed: </strong>{formatBytes(speedAvg)}PS</p> {/*speedAvg*/}
-                <p><strong>Total transferred: </strong>{formatBytes(bytes)}</p> {/*bytes: convert to mb*/}
-                <p><strong>Size: </strong>{formatBytes(size)}</p>
-                <p><strong>ETA: </strong>{secondsToStr(eta)}</p>
+                <p><strong>{intl.get("DASHBOARD.SPEED")}: </strong>{formatBytes(speed)}PS</p> {/*speed*/}
+                <p><strong>{intl.get("DASHBOARD.AVERAGE_SPEED")}: </strong>{formatBytes(speedAvg)}PS</p> {/*speedAvg*/}
+                <p><strong>{intl.get("DASHBOARD.TOTAL_TRANSFERRED")}: </strong>{formatBytes(bytes)}</p> {/*bytes: convert to mb*/}
+                <p><strong>{intl.get("DASHBOARD.SIZE")}: </strong>{formatBytes(size)}</p>
+                <p><strong>{intl.get("DASHBOARD.ETA")}: </strong>{secondsToStr(eta)}</p>
             </CardBody>
 
         </Card>);
@@ -74,7 +75,7 @@ function JobCardRow({job}) {
                     <Col lg={12} className="itemName"> {getCroppedName(name)} {" "}
                         ({formatBytes(size)}) - {formatBytes(speedAvg)}PS </Col>
                 ) : (
-                    <Col lg={12}>Calculating</Col>)}
+                    <Col lg={12}>{intl.get("DASHBOARD.CALCULATING")}</Col>)}
 
             </Row>
             <Row>
@@ -91,40 +92,40 @@ function GlobalStatus({stats}) {
     const {speed, bytes, checks, elapsedTime, deletes, errors, transfers, lastError} = stats;
     return (
         <Card>
-            <CardHeader><strong>Global Stats</strong></CardHeader>
+            <CardHeader><strong>{intl.get("DASHBOARD.GLOBAL_STATS")}</strong></CardHeader>
             <CardBody>
                 <table className="table">
                     <tbody>
                     <tr>
-                        <td className="card-subtitle">Bytes Transferred:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.BYTES_TRANSFERRED")}:</td>
                         <td className="card-text">{formatBytes(bytes)}</td>
                     </tr>
                     <tr>
-                        <td className="card-subtitle">Average Speed:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.AVERAGE_SPEED")}:</td>
                         <td className="card-text">{formatBytes(speed)}PS</td>
                     </tr>
                     <tr>
-                        <td className="card-subtitle">Checks:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.CHECKS")}:</td>
                         <td className="card-text">{checks}</td>
                     </tr>
                     <tr>
-                        <td className="card-subtitle">Deletes:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.DELETES")}:</td>
                         <td className="card-text">{deletes}</td>
                     </tr>
                     <tr>
-                        <td className="card-subtitle">Running since:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.RUNNING_SINCE")}:</td>
                         <td className="card-text">{secondsToStr(elapsedTime)}</td>
                     </tr>
                     <tr className={errors > 0 ? "table-danger" : ""}>
-                        <td className="card-subtitle">Errors:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.ERRORS")}:</td>
                         <td className="card-text">{errors}</td>
                     </tr>
                     <tr>
-                        <td className="card-subtitle">Transfers:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.TRANSFERS")}:</td>
                         <td className="card-text">{transfers}</td>
                     </tr>
                     <tr>
-                        <td className="card-subtitle">Last Error:</td>
+                        <td className="card-subtitle">{intl.get("DASHBOARD.LAST_ERROR")}:</td>
                         <td className="card-text">{lastError}</td>
                     </tr>
 
@@ -174,9 +175,9 @@ function JobGroup({job, groupId}) {
             setCancelButtonEnabled(false);
             const jobid = groupId.split('/')[1];
             axiosInstance.post(urls.stopJob, {jobid, _async:true}).then(function (res) {
-                toast.info(`Job ${jobid} stopped`);
+                toast.info(intl.get("DASHBOARD.JOB_STOPPED", {jobid: jobid}));
             }).catch(err => {
-                toast.error(`Job ${jobid} couldn't be stopped`)
+                toast.error(intl.get("DASHBOARD.JOB_NOT_STOPPED", {jobid: jobid}))
             })
         }
     };
@@ -191,7 +192,7 @@ function JobGroup({job, groupId}) {
                         <Container>
                             <Row>
                                 <Col sm={10}>
-                                    Transferring {job.length} file(s)
+                                    {intl.get("DASHBOARD.TRANSFERRING_FILES", {length: job.length})}
                                 </Col>
                                 <Col sm={2}>
                                     <Button color={"light"} disabled={!cancelButtonEnabled}
@@ -256,7 +257,7 @@ class RunningJobs extends React.Component {
                         <Col sm={12} lg={6}>
                             <Card>
                                 <CardHeader>
-                                    Speed
+                                    {intl.get("DASHBOARD.SPEED")}
                                 </CardHeader>
                                 <CardBody>
                                     <div className="chart-wrapper">
@@ -271,7 +272,7 @@ class RunningJobs extends React.Component {
                     </Row>
                 );
             } else {
-                return (<div>Not connected to rclone.</div>)
+                return (<div>{intl.get("DASHBOARD.RCLONE_NOT_CONNECTED")}</div>)
             }
 
         } else if (mode === "card") {
@@ -280,7 +281,7 @@ class RunningJobs extends React.Component {
                     <TransferringJobsRow transferring={transferring}/>
                 );
             } else {
-                return (<div>Not connected to rclone.</div>);
+                return (<div>{intl.get("DASHBOARD.RCLONE_NOT_CONNECTED")}</div>);
             }
 
         } else if (mode === "modal") {
@@ -334,7 +335,7 @@ const mapStateToProps = (state, ownProps) => {
             labels: labels,
             datasets: [
                 {
-                    label: 'Speed (kbps)',
+                    label: intl.get("DASHBOARD.SPEED_KBPS"),
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(75,192,192,0.4)',
@@ -355,7 +356,7 @@ const mapStateToProps = (state, ownProps) => {
                     data: data1,
                 },
                 {
-                    label: 'Average Speed (kbps)',
+                    label: intl.get("DASHBOARD.AVERAGE_SPEED_KBPS"),
                     fill: true,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(187,69,14,0.4)',

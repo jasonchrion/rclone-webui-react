@@ -1,32 +1,34 @@
+import {getMessage} from "./utils/Tools";
+
 export default {
     items: [
         {
-            name: 'Dashboard',
+            name: getMessage("NAV.DASHBOARD"),
             url: '/dashboard',
             icon: 'icon-speedometer'
         },
         {
-            name: 'Configs',
+            name: getMessage("NAV.CONFIGS"),
             url: '/showconfig',
             icon: 'icon-note'
         },
         {
-            name: 'Explorer',
+            name: getMessage("NAV.EXPLORER"),
             url: '/remoteExplorer',
             icon: 'icon-screen-desktop'
         },
         {
-            name: 'Backend',
+            name: getMessage("NAV.BACKEND"),
             url: '/rcloneBackend',
             icon: 'icon-star',
         },
         {
-            name: 'Mounts',
+            name: getMessage("NAV.MOUNTS"),
             url: '/mountDashboard',
             icon: 'fa fa-hdd-o'
         },
         {
-            name: 'Log Out',
+            name: getMessage("NAV.LOGOUT"),
             url: '/login',
             icon: 'icon-logout',
         },
