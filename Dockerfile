@@ -10,7 +10,7 @@ COPY . ./
 
 RUN NODE_OPTIONS=--max_old_space_size=8192 npm run build
 
-FROM alpine:3.15.4
+FROM alpine:3.17.0
 
 ENV TZ "Asia/Shanghai"
 WORKDIR /
