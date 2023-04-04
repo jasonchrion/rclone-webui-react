@@ -1,3 +1,7 @@
+# docker buildx build  --builder=bigdata-builder --platform=linux/amd64,linux/arm64 --provenance=false \
+#  --build-arg http_proxy=http://10.16.10.246:1080 --build-arg https_proxy=http://10.16.10.246:1080 --build-arg no_proxy='harbor.dameng.io,git.dameng.com,192.168.115.208' \
+#  --push -t harbor.dameng.io/dmcca/rclone-webui:2.0.5 .
+
 FROM node:14.19 AS builder
 
 WORKDIR /workspace
