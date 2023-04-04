@@ -10,7 +10,7 @@ COPY . ./
 
 RUN NODE_OPTIONS=--max_old_space_size=8192 npm run build
 
-FROM alpine:3.17.0
+FROM alpine:3.17.3
 
 ENV TZ "Asia/Shanghai"
 WORKDIR /
@@ -18,8 +18,8 @@ WORKDIR /
 COPY --from=builder /workspace/build ./rclone-webui-react
 
 # rclone
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/' /etc/apk/repositories && \
-    apk update && apk --no-cache add ca-certificates curl fuse && \
+RUN set -ex && \
+    apk update && apk --no-cache add ca-certificates curl fuse fuse3 && \
     curl -LO https://downloads.rclone.org/rclone-current-linux-amd64.zip && \
     unzip rclone-current-linux-amd64.zip && \
     mv rclone-*-linux-amd64/rclone /usr/bin/ && \
