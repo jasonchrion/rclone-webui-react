@@ -8,7 +8,7 @@ WORKDIR /workspace
 
 COPY package.json package-lock.json ./
 
-RUN npm config set registry https://registry.npmmirror.com && npm install
+RUN npm install
 
 COPY . ./
 
