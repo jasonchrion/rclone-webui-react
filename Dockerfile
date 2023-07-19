@@ -14,7 +14,7 @@ COPY . ./
 
 RUN NODE_OPTIONS=--max_old_space_size=8192 npm run build
 
-FROM alpine:3.17.3
+FROM alpine:3.17.4
 
 ARG TARGETARCH
 
